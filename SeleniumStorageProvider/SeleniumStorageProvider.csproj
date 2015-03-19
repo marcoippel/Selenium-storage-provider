@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\EventType.cs" />
     <Compile Include="Interfaces\IStorageProvider.cs" />
     <Compile Include="Provider\AzureBlob.cs" />
     <Compile Include="Storage.cs" />

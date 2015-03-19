@@ -2,6 +2,7 @@
 using System.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Interfaces;
 
 namespace SeleniumStorageProvider.Provider
@@ -30,14 +31,16 @@ namespace SeleniumStorageProvider.Provider
             CloudStorageAccount = CloudStorageAccount.Parse(connectionString);
         }
 
-        public void Save(byte[] file, string fileName)
+        public void Save(byte[] file, string fileName, EventType type)
         {
             var dateTime = DateTime.Now;
             CloudBlobClient blobClient = CloudStorageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference("seleniumscreenshots");
             container.CreateIfNotExists();
 
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(string.Format("{0}/{1}/{2}/{3}/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName));
+            string blobFileName = type == EventType.Info ? string.Format("{0}/info/{1}/{2}/{3}/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName) : string.Format("{0}/error/{1}/{2}/{3}/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName);
+
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
             blockBlob.Properties.ContentType = "text/html";
             blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
         }

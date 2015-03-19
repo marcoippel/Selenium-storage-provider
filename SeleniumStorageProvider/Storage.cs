@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Interfaces;
 using SeleniumStorageProvider.Provider;
 
@@ -22,7 +23,7 @@ namespace SeleniumStorageProvider
             _storageProvider = storage;
         }
 
-        public void Save(string base64File, string pageSource, string url, string message)
+        public void Save(string base64File, string pageSource, string url, string message, EventType type)
         {
             //
             // Create html file
@@ -38,7 +39,7 @@ namespace SeleniumStorageProvider
 
 
             // Save the html file
-            _storageProvider.Save(byteArray, fileName);
+            _storageProvider.Save(byteArray, fileName, type);
         }
 
         private string CreateErrorTemplate(string base64File, string pageSource, string url, string message)

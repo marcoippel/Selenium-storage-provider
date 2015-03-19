@@ -38,7 +38,7 @@ namespace SeleniumStorageProvider.Provider
             CloudBlobContainer container = blobClient.GetContainerReference("seleniumscreenshots");
             container.CreateIfNotExists();
 
-            string blobFileName = type == EventType.Info ? string.Format("{0}/info/{1}/{2}/{3}/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName) : string.Format("{0}/error/{1}/{2}/{3}/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName);
+            string blobFileName = type == EventType.Info ? string.Format("{0}/{1}/{2}/{3}/info/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName) : string.Format("{0}/{1}/{2}/{3}/error/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName);
 
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
             blockBlob.Properties.ContentType = "text/html";

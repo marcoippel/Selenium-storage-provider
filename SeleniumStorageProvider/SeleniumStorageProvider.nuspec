@@ -10,6 +10,10 @@
     <copyright>Copyright 2015</copyright>
     <projectUrl>https://github.com/marcoippel/Selenium-storage-provider</projectUrl>
   </metadata>
+  <dependencies>
+    <dependency id="WindowsAzure.Storage" version="4.3.0" />
+    <dependency id="Selenium.Support" version="2.45.0" />
+  </dependencies>
   <files>
     <file src="web.config.transform" target="content" />
   </files>

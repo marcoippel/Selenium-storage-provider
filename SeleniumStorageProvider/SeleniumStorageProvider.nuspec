@@ -8,6 +8,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>Copyright 2015</copyright>
+    <projectUrl>https://github.com/marcoippel/Selenium-storage-provider</projectUrl>
   </metadata>
   <files>
     <file src="web.config.transform" target="content" />

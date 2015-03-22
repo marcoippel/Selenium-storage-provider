@@ -1,1 +1,1 @@
-..\.nuget\NuGet.exe pack ..\SeleniumStorageProvider\SeleniumStorageProvider.csproj
+..\.nuget\NuGet.exe pack ..\SeleniumStorageProvider\SeleniumStorageProvider.csproj -Prop Configuration=Release

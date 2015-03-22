@@ -1,12 +1,17 @@
 ﻿<!DOCTYPE html>
-
+<!-- saved from url=(0115)https://seleniumscreenshots.blob.core.windows.net/seleniumscreenshots/EnablingFarmers/2015/3/20/error/12-53-24.html -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body>
     <style>
         body {
-            background-color: #fdfdcb;
+            padding-top: 20px;
+            background-color: #eee;
         }
 
         .center {
@@ -30,11 +35,67 @@
             background-color: #fff;
         }
 
+            pre.pageSource {
+                margin: 20px;
+            }
+
         img {
-            max-width:100%;
+            max-width: 100%;
+            cursor: pointer;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <div class="container">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Selenium test</h1>
+                    <p>
+                        <a href="{url}" class="btn btn-info btn-block">
+                            {url}
+                        </a>
+                    </p>
+                    <h2>Message</h2>
+                    <p>
+                        {message}
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img data-toggle="modal" data-target="#myModal" src="data:image/png;base64,{base64string}" width="100%">
+                </div>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row text-center">
+                <a class="btn btn-primary">Click to show the page source:</a>
+                <pre class="pageSource text-left">
+				{pagesource}
+			</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Exception screenshot</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="data:image/png;base64,{base64string}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $("a").click(function () {
@@ -42,22 +103,5 @@
             });
         });
     </script>
-</head>
-<body>
-    <div class="center">
-        <p>
-            <span>Url:</span><br />  {url}
-        </p>
-        <p>
-            <span>Message:</span><br />  {message}
-        </p>
-        <p>
-            <span><a>Click to show the page source:</a></span>
-        </p>
-            <pre class="pageSource">{pagesource}</pre>
-        <p>
-            <img src="data:image/png;base64,{base64string}" />
-        </p>
-    </div>
 </body>
 </html>

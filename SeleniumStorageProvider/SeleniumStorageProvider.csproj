@@ -84,7 +84,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="SeleniumStorageProvider.nuspec" />
-    <None Include="web.config.transform" />
+    <None Include="App.config.transform" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\" />

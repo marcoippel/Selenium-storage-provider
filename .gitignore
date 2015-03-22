@@ -1,3 +1,5 @@
 /packages
 /SeleniumStorageProvider/obj
 /SeleniumStorageProvider/bin
+/SeleniumStorageProvider.UnitTest/bin
+/SeleniumStorageProvider.UnitTest/obj

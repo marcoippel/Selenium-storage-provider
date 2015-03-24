@@ -4,9 +4,17 @@ Save your selenium screenshots to a azure blob storage account. Including the ur
 
 Example: 
 ```
+private Storage _storage;
+[SetUp]
+public void Initialize()
+{
+	_storage = new Storage();
+}
+
 private void TakeScreenshot(IWebDriver driver, string message, EventType eventType)
 {
-    string screenshot = driver.TakeScreenshot().AsBase64EncodedString;
-    _storage.Save(screenshot, driver.PageSource, _driver.Url, message, eventType);
+	var methodName = new StackFrame(1, true).GetMethod().Name;
+	string screenshot = driver.TakeScreenshot().AsBase64EncodedString;
+	_storage.Save(screenshot, driver.PageSource, _driver.Url, message, methodName, eventType);
 }
 ```

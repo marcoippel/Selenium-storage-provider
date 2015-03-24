@@ -23,11 +23,11 @@ namespace SeleniumStorageProvider
             _storageProvider = storage;
         }
 
-        public void Save(string base64File, string pageSource, string url, string message, EventType type)
+        public void Save(string base64File, string pageSource, string url, string message, string methodName, EventType type)
         {
             //
             // Create html file
-            var htmlFile = CreateErrorTemplate(base64File, pageSource, url, message);
+            var htmlFile = CreateErrorTemplate(base64File, pageSource, url, message, methodName);
             if (string.IsNullOrEmpty(htmlFile))
             {
                 throw new Exception("Error creating the html template");
@@ -42,12 +42,12 @@ namespace SeleniumStorageProvider
             _storageProvider.Save(byteArray, fileName, type);
         }
 
-        private string CreateErrorTemplate(string base64File, string pageSource, string url, string message)
+        private string CreateErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)
         {
             const string htmlTemplateFileName = "ErrorTemplate.html";
             string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
             var encodedPageSource = HttpUtility.HtmlEncode(pageSource);
-            return html.Replace("{url}", url).Replace("{message}", message).Replace("{base64string}", base64File).Replace("{pagesource}", encodedPageSource);
+            return html.Replace("{url}", url).Replace("{message}", message).Replace("{base64string}", base64File).Replace("{pagesource}", encodedPageSource).Replace("{methodName}", methodName);
         }
 
         private string LoadTemplate(Assembly currentAssembly, string resourceName)

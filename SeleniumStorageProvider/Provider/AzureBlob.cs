@@ -31,18 +31,18 @@ namespace SeleniumStorageProvider.Provider
             CloudStorageAccount = CloudStorageAccount.Parse(connectionString);
         }
 
-        public void Save(byte[] file, string fileName, EventType type)
+        public void Save(byte[] file,string methodName, string fileName, EventType type)
         {
             var dateTime = DateTime.Now;
             CloudBlobClient blobClient = CloudStorageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference("seleniumscreenshots");
             container.CreateIfNotExists();
 
-            string blobFileName = type == EventType.Info ? string.Format("{0}/{1}/{2}/{3}/info/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName) : string.Format("{0}/{1}/{2}/{3}/error/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName);
+            string blobFileName = type == EventType.Info ? string.Format("{0}/{1}/{2}/{3}/info/{4}/{5}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, methodName, fileName) : string.Format("{0}/{1}/{2}/{3}/error/{4}/{5}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, methodName, fileName);
 
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
             blockBlob.Properties.ContentType = "text/html";
-            blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
+            blockBlob.UploadFromByteArray(file, 0, file.Length);
         }
     }
 }

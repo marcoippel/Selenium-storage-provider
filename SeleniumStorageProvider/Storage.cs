@@ -39,7 +39,7 @@ namespace SeleniumStorageProvider
 
 
             // Save the html file
-            _storageProvider.Save(byteArray, fileName, type);
+            _storageProvider.Save(byteArray, methodName.ToLowerInvariant(), fileName, type);
         }
 
         private string CreateErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)

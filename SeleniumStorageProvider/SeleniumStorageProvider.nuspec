@@ -14,11 +14,12 @@
     <dependency id="Selenium.Support" version="2.45.0" />
   </dependencies>
   <releaseNotes>
-	Template fixed, added the method name to the html template
+	  App.config transformation fixed
   </releaseNotes>
   </metadata>
   <files>
-    <file src="app.config.transform" target="content" />
+    <file src="app.config.install.xdt" target="content" />
+    <file src="app.config.uninstall.xdt" target="content" />
   </files>
   
   

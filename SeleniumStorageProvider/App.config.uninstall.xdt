@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="StorageContainer" value="" xdt:Transform="Remove" xdt:Locator="Match(key)"/>
+    <add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName={your accountname};AccountKey={your acount key}" xdt:Transform="Remove" xdt:Locator="Match(key)"/>
+  </appSettings>
+</configuration>

@@ -9,16 +9,18 @@
     <description>$description$</description>
     <copyright>Copyright 2015</copyright>
     <projectUrl>https://github.com/marcoippel/Selenium-storage-provider</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/marcoippel/Selenium-storage-provider/develop/Nuget.png</iconUrl>
 	<dependencies>
     <dependency id="WindowsAzure.Storage" version="4.3.0" />
     <dependency id="Selenium.Support" version="2.45.0" />
   </dependencies>
   <releaseNotes>
-	Template fixed, added the method name to the html template
+	  1.0.0.8 Filename changed to 24 hour format
   </releaseNotes>
   </metadata>
   <files>
-    <file src="app.config.transform" target="content" />
+    <file src="app.config.install.xdt" target="content" />
+    <file src="app.config.uninstall.xdt" target="content" />
   </files>
   
   

@@ -18,3 +18,6 @@ private void TakeScreenshot(IWebDriver driver, string message, EventType eventTy
 	_storage.Save(screenshot, driver.PageSource, _driver.Url, message, methodName, eventType);
 }
 ```
+
+## Screenshot
+![Image of Yaktocat](https://raw.githubusercontent.com/marcoippel/Selenium-storage-provider/develop/Screenshot/screenshot.PNG)

@@ -9,12 +9,13 @@
     <description>$description$</description>
     <copyright>Copyright 2015</copyright>
     <projectUrl>https://github.com/marcoippel/Selenium-storage-provider</projectUrl>
+    <iconUrl></iconUrl>
 	<dependencies>
     <dependency id="WindowsAzure.Storage" version="4.3.0" />
     <dependency id="Selenium.Support" version="2.45.0" />
   </dependencies>
   <releaseNotes>
-	  App.config transformation fixed
+	  1.0.0.8 Filename changed to 24 hour format
   </releaseNotes>
   </metadata>
   <files>

@@ -11,6 +11,12 @@ namespace SeleniumStorageProvider.Provider
     {
         private CloudStorageAccount CloudStorageAccount { get; set; }
 
+        /// <summary>
+        /// Gets the storage container.
+        /// </summary>
+        /// <value>
+        /// The storage container.
+        /// </value>
         private string StorageContainer
         {
             get
@@ -20,6 +26,10 @@ namespace SeleniumStorageProvider.Provider
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureBlob"/> class.
+        /// </summary>
+        /// <exception cref="System.Exception">There is in the appsettings no key found with name: StorageConnectionString</exception>
         public AzureBlob()
         {
             string connectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
@@ -31,6 +41,13 @@ namespace SeleniumStorageProvider.Provider
             CloudStorageAccount = CloudStorageAccount.Parse(connectionString);
         }
 
+        /// <summary>
+        /// Saves the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="methodName">Name of the method.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="type">The type.</param>
         public void Save(byte[] file,string methodName, string fileName, EventType type)
         {
             var dateTime = DateTime.Now;

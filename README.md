@@ -19,3 +19,5 @@ private void TakeScreenshot(IWebDriver driver, string message, EventType eventTy
 }
 ```
 
+## Screenshot
+![Image of Yaktocat](https://raw.githubusercontent.com/marcoippel/Selenium-storage-provider/develop/Screenshot/screenshot.PNG)

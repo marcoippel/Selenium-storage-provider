@@ -1,0 +1,13 @@
+﻿using SeleniumStorageProvider.Enum;
+
+namespace SeleniumStorageProvider.Interfaces
+{
+    public interface IStorageProvider
+    {
+<<<<<<< HEAD
+        void Save(byte[] screenshot, string pageSource, string type, string message, string methodName, EventType eventType);
+=======
+        void Save(byte[] file, string methodName, string fileName, EventType type);
+>>>>>>> cb449082b53b144faa161a53202e5a013daacc50
+    }
+}

@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{FBB3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumStorageProvider.UnitTest", "SeleniumStorageProvider.UnitTest\SeleniumStorageProvider.UnitTest.csproj", "{936E26DB-B227-484F-B380-7D376F1AA0DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTest", "SeleniumTest\SeleniumTest.csproj", "{0E1A277D-80C2-4446-9886-F17AE6136590}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{936E26DB-B227-484F-B380-7D376F1AA0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{936E26DB-B227-484F-B380-7D376F1AA0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{936E26DB-B227-484F-B380-7D376F1AA0DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1A277D-80C2-4446-9886-F17AE6136590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1A277D-80C2-4446-9886-F17AE6136590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1A277D-80C2-4446-9886-F17AE6136590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1A277D-80C2-4446-9886-F17AE6136590}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

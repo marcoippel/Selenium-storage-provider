@@ -78,7 +78,8 @@
   <ItemGroup>
     <Compile Include="Enum\EventType.cs" />
     <Compile Include="Interfaces\IStorageProvider.cs" />
-    <Compile Include="Provider\AzureBlob.cs" />
+    <Compile Include="Provider\AzureBlobProvider.cs" />
+    <Compile Include="Provider\SlackProvider.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

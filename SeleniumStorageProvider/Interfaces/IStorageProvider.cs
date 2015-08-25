@@ -4,6 +4,6 @@ namespace SeleniumStorageProvider.Interfaces
 {
     public interface IStorageProvider
     {
-        void Save(byte[] file, string fileName, EventType type);
+        void Save(byte[] screenshot, string pageSource, string type, string message, string methodName, EventType eventType);
     }
 }

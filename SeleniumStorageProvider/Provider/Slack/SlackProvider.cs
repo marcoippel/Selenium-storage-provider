@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Interfaces;
@@ -11,6 +11,7 @@ namespace SeleniumStorageProvider.Provider.Slack
 {
     public class SlackProvider : IStorageProvider
     {
+        private readonly HttpClient _httpClient;
         private string ChannelId { get; set; }
         private const string SlackUrl = "https://slack.com/api";
 
@@ -38,12 +39,17 @@ namespace SeleniumStorageProvider.Provider.Slack
                 return channel.StartsWith("#") ? channel.Replace("#", string.Empty) : channel;
             }
         }
-        
+
+        public SlackProvider() : this(new HttpClient())
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackProvider"/> class.
         /// </summary>
-        public SlackProvider()
+        public SlackProvider(HttpClient httpClient)
         {
+            _httpClient = httpClient;
             ChannelId = GetSlackChannelId();
         }
 
@@ -53,18 +59,17 @@ namespace SeleniumStorageProvider.Provider.Slack
         /// <returns>The id of the slack channel</returns>
         private string GetSlackChannelId()
         {
-            using (WebClient webClient = new WebClient())
-            {
-                string response = webClient.DownloadString(string.Format("{0}/channels.list?token={1}", SlackUrl, Token));
-                JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-                SlackChannelModel slackChannels = javaScriptSerializer.Deserialize<SlackChannelModel>(response);
+            Task<string> response = _httpClient.GetStringAsync(string.Format("{0}/channels.list?token={1}", SlackUrl, Token));
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
 
-                Channel slackChannel = slackChannels.channels.SingleOrDefault(x => x.name == Channel);
-                if (slackChannel != null)
-                {
-                    return slackChannel.id;
-                }
+            SlackChannelModel slackChannels = javaScriptSerializer.Deserialize<SlackChannelModel>(response.Result);
+
+            Channel slackChannel = slackChannels.channels.SingleOrDefault(x => x.name == Channel);
+            if (slackChannel != null)
+            {
+                return slackChannel.id;
             }
+           
 
             return null;
         }
@@ -86,25 +91,21 @@ namespace SeleniumStorageProvider.Provider.Slack
             HttpContent channelContent = new StringContent(ChannelId);
             HttpContent bytesContent = new ByteArrayContent(screenshot);
 
-            using (var client = new HttpClient())
-            using (var formData = new MultipartFormDataContent())
+            //using (var client = new HttpClient())
+            var formData = new MultipartFormDataContent
             {
-                formData.Add(tokenContent, "token");
-                formData.Add(titleContent, "title");
-                formData.Add(messageContent, "initial_comment");
-                formData.Add(titleContent, "initial_comment");
-                formData.Add(bytesContent, "file", "screenshot.jpg");
-                formData.Add(channelContent, "channels");
+                {tokenContent, "token"},
+                {titleContent, "title"},
+                {messageContent, "initial_comment"},
+                {titleContent, "initial_comment"},
+                {bytesContent, "file", "screenshot.jpg"},
+                {channelContent, "channels"}
+            };
+            
+            Task<string> respone = _httpClient.PostAsync(string.Format("{0}/files.upload", SlackUrl), formData).Result.Content.ReadAsStringAsync();
 
-                
-                var response = client.PostAsync(string.Format("{0}/files.upload", SlackUrl), formData).Result;
-                if (!response.IsSuccessStatusCode)
-                {
-                    var a = response.Content.ReadAsStreamAsync().Result;
-                }
-
-                var b = response.Content.ReadAsStreamAsync().Result;
-            }
+            formData.Dispose();
+            _httpClient.Dispose();
         }
     }
 }

@@ -1,0 +1,55 @@
+{
+    "ok": true,
+    "channels": [
+        {
+            "id": "D09K1RG0H",
+            "name": "general",
+            "is_channel": true,
+            "created": 1440521383,
+            "creator": "K09K1PLG6",
+            "is_archived": false,
+            "is_general": true,
+            "is_member": true,
+            "members": [
+                "Y09K1YLG0",
+                "N09L8FT3N"
+            ],
+            "topic": {
+                "value": "Company-wide announcements and work-based matters",
+                "creator": "",
+                "last_set": 0
+            },
+            "purpose": {
+                "value": "This channel is for team-wide communication and announcements. All team members are in this channel.",
+                "creator": "",
+                "last_set": 0
+            },
+            "num_members": 2
+        },
+        {
+            "id": "D09K1RG0H",
+            "name": "unittest",
+            "is_channel": true,
+            "created": 1440521383,
+            "creator": "K09K1PLG6",
+            "is_archived": false,
+            "is_general": true,
+            "is_member": true,
+            "members": [
+                "Y09K1YLG0",
+                "N09L8FT3N"
+            ],
+            "topic": {
+                "value": "Company-wide announcements and work-based matters",
+                "creator": "",
+                "last_set": 0
+            },
+            "purpose": {
+                "value": "This channel is for team-wide communication and announcements. All team members are in this channel.",
+                "creator": "",
+                "last_set": 0
+            },
+            "num_members": 2
+        }
+    ]
+}

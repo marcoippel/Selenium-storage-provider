@@ -1,11 +1,4 @@
-﻿using System;
-using System.Fakes;
-using System.Web;
-using FakeItEasy;
-using Microsoft.QualityTools.Testing.Fakes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SeleniumStorageProvider.Enum;
-using SeleniumStorageProvider.Interfaces;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SeleniumStorageProvider.UnitTest
 {

@@ -15979,9 +15979,6 @@
         <member name="P:System.IO.Fakes.ShimStreamReader.Decoder_PropGet">
             <summary>Sets the shim of StreamReader.get_Decoder_Prop()</summary>
         </member>
-        <member name="P:System.IO.Fakes.ShimStreamReader.DefaultBufferSizeGet">
-            <summary>Sets the shim of StreamReader.get_DefaultBufferSize()</summary>
-        </member>
         <member name="P:System.IO.Fakes.ShimStreamReader.DetectEncoding">
             <summary>Sets the shim of StreamReader.DetectEncoding()</summary>
         </member>

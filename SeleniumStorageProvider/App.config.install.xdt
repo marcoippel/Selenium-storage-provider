@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <appSettings>
-    <add key="StorageContainer" value="" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)"/>
-    <add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName={your accountname};AccountKey={your acount key}" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)"/>
+    <add key="AzureBlob:StorageContainer" value="" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)"/>
+    <add key="AzureBlob:StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName={your accountname};AccountKey={your acount key}" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)"/>
+    <add key="Slack:Token" value="{your slack token}" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)"/>
+    <add key="Slack:Channel" value="{#channel}" xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)"/>
   </appSettings>
 </configuration>

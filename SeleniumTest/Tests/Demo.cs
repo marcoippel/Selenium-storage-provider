@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 using SeleniumStorageProvider;
 using SeleniumStorageProvider.Enum;
-using SeleniumStorageProvider.Provider;
+using SeleniumStorageProvider.Provider.Slack;
 using SeleniumTest.Business;
 using SeleniumTest.Enums;
 using SeleniumTest.Helpers;

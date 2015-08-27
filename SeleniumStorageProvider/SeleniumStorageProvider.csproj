@@ -69,6 +69,7 @@
       <HintPath>..\packages\System.Spatial.5.6.3\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,8 +79,9 @@
   <ItemGroup>
     <Compile Include="Enum\EventType.cs" />
     <Compile Include="Interfaces\IStorageProvider.cs" />
-    <Compile Include="Provider\AzureBlobProvider.cs" />
-    <Compile Include="Provider\SlackProvider.cs" />
+    <Compile Include="Provider\AzureBlob\AzureBlobProvider.cs" />
+    <Compile Include="Provider\Slack\SlackChannelModel.cs" />
+    <Compile Include="Provider\Slack\SlackProvider.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

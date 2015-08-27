@@ -3,3 +3,5 @@
 /SeleniumStorageProvider/bin
 /SeleniumStorageProvider.UnitTest/bin
 /SeleniumStorageProvider.UnitTest/obj
+/SeleniumTest/bin
+/SeleniumTest/obj

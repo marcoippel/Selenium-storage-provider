@@ -10,7 +10,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Interfaces;
 
-namespace SeleniumStorageProvider.Provider
+namespace SeleniumStorageProvider.Provider.AzureBlob
 {
     public class AzureBlobProvider : IStorageProvider
     {
@@ -20,14 +20,18 @@ namespace SeleniumStorageProvider.Provider
         {
             get
             {
-                string containerName = ConfigurationManager.AppSettings["StorageContainer"];
+                string containerName = ConfigurationManager.AppSettings["AzureBlob:StorageContainer"];
                 return string.IsNullOrEmpty(containerName) ? "default" : containerName;
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureBlobProvider"/> class.
+        /// </summary>
+        /// <exception cref="System.Exception">There is in the appsettings no key found with name: StorageConnectionString</exception>
         public AzureBlobProvider()
         {
-            string connectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
+            string connectionString = ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"];
             if (string.IsNullOrEmpty(connectionString))
             {
                 throw new Exception("There is in the appsettings no key found with name: StorageConnectionString");
@@ -36,6 +40,16 @@ namespace SeleniumStorageProvider.Provider
             CloudStorageAccount = CloudStorageAccount.Parse(connectionString);
         }
 
+        /// <summary>
+        /// Saves the specified screenshot.
+        /// </summary>
+        /// <param name="screenshot">The screenshot.</param>
+        /// <param name="pageSource">The page source.</param>
+        /// <param name="url">The URL.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="methodName">Name of the method.</param>
+        /// <param name="eventType">Type of the event.</param>
+        /// <exception cref="System.Exception">Error creating the html template</exception>
         public void Save(byte[] screenshot, string pageSource, string url, string message, string methodName, EventType eventType)
         {
             var htmlFile = CreateErrorTemplate(Convert.ToBase64String(screenshot), pageSource, url, message, methodName);
@@ -60,7 +74,7 @@ namespace SeleniumStorageProvider.Provider
             blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
         }
 
-        private string CreateErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)
+        private static string CreateErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)
         {
             const string htmlTemplateFileName = "ErrorTemplate.html";
             string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
@@ -68,7 +82,7 @@ namespace SeleniumStorageProvider.Provider
             return html.Replace("{url}", url).Replace("{message}", message).Replace("{base64string}", base64File).Replace("{pagesource}", encodedPageSource).Replace("{methodName}", methodName);
         }
 
-        private string LoadTemplate(Assembly currentAssembly, string resourceName)
+        private static string LoadTemplate(Assembly currentAssembly, string resourceName)
         {
             if (currentAssembly == null)
             {
@@ -93,7 +107,5 @@ namespace SeleniumStorageProvider.Provider
 
             return html;
         }
-
-        
     }
 }

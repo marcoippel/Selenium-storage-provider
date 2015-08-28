@@ -84,6 +84,8 @@
     <Compile Include="Provider\Slack\SlackProvider.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrappers\HttpClientWrapper.cs" />
+    <Compile Include="Wrappers\IHttpClientWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

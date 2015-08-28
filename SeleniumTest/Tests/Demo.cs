@@ -7,6 +7,7 @@ using OpenQA.Selenium.Support.Extensions;
 using SeleniumStorageProvider;
 using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Provider.Slack;
+using SeleniumStorageProvider.Wrappers;
 using SeleniumTest.Business;
 using SeleniumTest.Enums;
 using SeleniumTest.Helpers;
@@ -37,7 +38,7 @@ namespace SeleniumTest.Tests
         public void Initialize()
         {
             SetupDriver(_device);
-            _storage = new Storage(new SlackProvider());
+            _storage = new Storage(new SlackProvider(new HttpClientWrapper()));
         }
 
         [TearDown]

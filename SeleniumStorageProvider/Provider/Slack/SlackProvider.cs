@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Interfaces;
+using SeleniumStorageProvider.Wrappers;
 
 namespace SeleniumStorageProvider.Provider.Slack
 {
     public class SlackProvider : IStorageProvider
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientWrapper _httpClient;
         private string ChannelId { get; set; }
         private const string SlackUrl = "https://slack.com/api";
 
@@ -40,31 +41,28 @@ namespace SeleniumStorageProvider.Provider.Slack
             }
         }
 
-        public SlackProvider() : this(new HttpClient())
-        {
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackProvider"/> class.
         /// </summary>
-        public SlackProvider(HttpClient httpClient)
+        public SlackProvider(IHttpClientWrapper httpClient)
         {
             _httpClient = httpClient;
-            ChannelId = GetSlackChannelId();
+            ChannelId = GetSlackChannelId(Channel);
         }
 
         /// <summary>
         /// Gets the slack channel identifier.
         /// </summary>
         /// <returns>The id of the slack channel</returns>
-        private string GetSlackChannelId()
+        private string GetSlackChannelId(string channelName)
         {
-            Task<string> response = _httpClient.GetStringAsync(string.Format("{0}/channels.list?token={1}", SlackUrl, Token));
+            string response = _httpClient.GetStringAsync(string.Format("{0}/channels.list?token={1}", SlackUrl, Token));
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
 
-            SlackChannelModel slackChannels = javaScriptSerializer.Deserialize<SlackChannelModel>(response.Result);
+            SlackChannelModel slackChannels = javaScriptSerializer.Deserialize<SlackChannelModel>(response);
 
-            Channel slackChannel = slackChannels.channels.SingleOrDefault(x => x.name == Channel);
+            Channel slackChannel = slackChannels.channels.SingleOrDefault(x => x.name == channelName);
             if (slackChannel != null)
             {
                 return slackChannel.id;
@@ -102,8 +100,8 @@ namespace SeleniumStorageProvider.Provider.Slack
                 {channelContent, "channels"}
             };
             
-            Task<string> respone = _httpClient.PostAsync(string.Format("{0}/files.upload", SlackUrl), formData).Result.Content.ReadAsStringAsync();
-
+            _httpClient.PostAsync(string.Format("{0}/files.upload", SlackUrl), formData);
+            
             formData.Dispose();
             _httpClient.Dispose();
         }

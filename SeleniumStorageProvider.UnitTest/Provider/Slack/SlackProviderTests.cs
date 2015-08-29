@@ -7,10 +7,10 @@ using SeleniumStorageProvider.Provider.Slack;
 using SeleniumStorageProvider.UnitTest.Business;
 using SeleniumStorageProvider.Wrappers;
 
-namespace SeleniumStorageProvider.UnitTest.Providers
+namespace SeleniumStorageProvider.UnitTest.Provider.Slack
 {
     [TestClass]
-    public class SlackProvicerTest
+    public class SlackProviderTests
     {
         private EmbeddedResource EmbeddedResource { get; set; }
 

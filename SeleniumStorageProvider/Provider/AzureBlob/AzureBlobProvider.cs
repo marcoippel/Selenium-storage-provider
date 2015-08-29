@@ -28,16 +28,18 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
         /// <summary>
         /// Initializes a new instance of the <see cref="AzureBlobProvider"/> class.
         /// </summary>
-        /// <exception cref="System.Exception">There is in the appsettings no key found with name: StorageConnectionString</exception>
-        public AzureBlobProvider()
+        /// <param name="connectionstring">The connectionstring.</param>
+        public AzureBlobProvider(string connectionstring) : this(CloudStorageAccount.Parse(connectionstring))
         {
-            string connectionString = ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"];
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new Exception("There is in the appsettings no key found with name: StorageConnectionString");
-            }
+        }
 
-            CloudStorageAccount = CloudStorageAccount.Parse(connectionString);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureBlobProvider"/> class.
+        /// </summary>
+        /// <exception cref="System.Exception">There is in the appsettings no key found with name: StorageConnectionString</exception>
+        public AzureBlobProvider(CloudStorageAccount cloudStorageAccount)
+        {
+            CloudStorageAccount = cloudStorageAccount;
         }
 
         /// <summary>

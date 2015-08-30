@@ -28,18 +28,16 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
         /// <summary>
         /// Initializes a new instance of the <see cref="AzureBlobProvider"/> class.
         /// </summary>
-        /// <param name="connectionstring">The connectionstring.</param>
-        public AzureBlobProvider(string connectionstring) : this(CloudStorageAccount.Parse(connectionstring))
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AzureBlobProvider"/> class.
-        /// </summary>
         /// <exception cref="System.Exception">There is in the appsettings no key found with name: StorageConnectionString</exception>
-        public AzureBlobProvider(CloudStorageAccount cloudStorageAccount)
+        public AzureBlobProvider()
         {
-            CloudStorageAccount = cloudStorageAccount;
+            string connectionString = ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"];
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new Exception("There is in the appsettings no key found with name: StorageConnectionString");
+            }
+
+            CloudStorageAccount = CloudStorageAccount.Parse(connectionString);
         }
 
         /// <summary>
@@ -65,12 +63,12 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
             string fileName = string.Format("{0}.html", DateTime.Now.ToString("HH-mm-ss"));
 
             var dateTime = DateTime.Now;
+            string blobFileName = eventType == EventType.Info ? string.Format("{0}/{1}/{2}/{3}/info/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName) : string.Format("{0}/{1}/{2}/{3}/error/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName);
+            
             CloudBlobClient blobClient = CloudStorageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference("seleniumscreenshots");
             container.CreateIfNotExists();
-
-            string blobFileName = eventType == EventType.Info ? string.Format("{0}/{1}/{2}/{3}/info/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName) : string.Format("{0}/{1}/{2}/{3}/error/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName);
-
+            
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
             blockBlob.Properties.ContentType = "text/html";
             blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);

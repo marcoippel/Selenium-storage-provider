@@ -1,6 +1,4 @@
-﻿using System;
-using System.Configuration;
-using SeleniumStorageProvider.Enum;
+﻿using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Interfaces;
 using SeleniumStorageProvider.Provider.AzureBlob;
 
@@ -10,24 +8,10 @@ namespace SeleniumStorageProvider
     {
         private readonly IStorageProvider _storageProvider;
 
-        private static string Connectionstring
-        {
-            get
-            {
-                string connectionString = ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"];
-                if (string.IsNullOrEmpty(connectionString))
-                {
-                    throw new Exception("There is in the appsettings no key found with name: StorageConnectionString");
-                }
-
-                return connectionString;
-            }
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Storage"/> class.
         /// </summary>
-        public Storage() : this(new AzureBlobProvider(Connectionstring))
+        public Storage() : this(new AzureBlobProvider())
         {
         }
 

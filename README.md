@@ -1,5 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/2nqf6d330qf09n27?svg=true)](https://ci.appveyor.com/project/marcoippel/selenium-storage-provider)
-[![Coverage Status](https://coveralls.io/repos/marcoippel/Selenium-storage-provider/badge.svg?branch=develop&service=github)](https://coveralls.io/github/marcoippel/Selenium-storage-provider?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/marcoippel/Selenium-storage-provider/badge.svg?branch=master&service=github)](https://coveralls.io/github/marcoippel/Selenium-storage-provider?branch=master)
 # Selenium-storage-provider
 
 Save your selenium screenshots to a azure blob storage account. Including the url, stacktrace and a screenshot.

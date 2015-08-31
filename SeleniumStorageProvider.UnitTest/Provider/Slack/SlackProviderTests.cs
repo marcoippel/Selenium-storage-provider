@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Provider.Slack;
 using SeleniumStorageProvider.UnitTest.Business;
@@ -9,7 +9,7 @@ using SeleniumStorageProvider.Wrappers;
 
 namespace SeleniumStorageProvider.UnitTest.Provider.Slack
 {
-    [TestClass]
+    [TestFixture]
     public class SlackProviderTests
     {
         private EmbeddedResource EmbeddedResource { get; set; }
@@ -20,7 +20,7 @@ namespace SeleniumStorageProvider.UnitTest.Provider.Slack
         private string ChannelId { get; set; }
         private byte[] Screenshot { get; set; }
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             EmbeddedResource = new EmbeddedResource();
@@ -32,7 +32,7 @@ namespace SeleniumStorageProvider.UnitTest.Provider.Slack
             Screenshot = EmbeddedResource.Get();
         }
 
-        [TestMethod]
+        [Test]
         public void Post_Screenshot()
         {
             string response = EmbeddedResource.Get("SeleniumStorageProvider.UnitTest.Response.ChannelList.json");

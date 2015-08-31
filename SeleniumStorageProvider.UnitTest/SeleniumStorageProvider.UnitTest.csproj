@@ -70,7 +70,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Business\EmbeddedResource.cs" />
-    <Compile Include="Provider\AzureBlob\AzureBlobProviderTests.cs" />
     <Compile Include="Provider\Slack\SlackProviderTests.cs" />
     <Compile Include="StorageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

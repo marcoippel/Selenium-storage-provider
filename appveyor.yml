@@ -1,20 +1,12 @@
 version: 1.0.{build}
-
-platform: Any CPU
-configuration: Release
-
 build:
   verbosity: detailed
-  project: SeleniumStorageProvider.sln  
-
 test:
-  assemblies:
-    - SeleniumStorageProvider.UnitTest.dll
-    
+  assemblies: SeleniumStorageProvider.UnitTest.dll
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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
-  channel: '#teamcity'
+  channel: '#appveyor'
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true

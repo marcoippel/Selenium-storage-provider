@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/2nqf6d330qf09n27?svg=true)](https://ci.appveyor.com/project/marcoippel/selenium-storage-provider)
+
 # Selenium-storage-provider
 
 Save your selenium screenshots to a azure blob storage account. Including the url, stacktrace and a screenshot.

@@ -41,7 +41,11 @@ namespace SeleniumStorageProvider.Provider.Slack
             }
         }
 
-        
+
+        public SlackProvider() : this(new HttpClientWrapper())
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackProvider"/> class.
         /// </summary>

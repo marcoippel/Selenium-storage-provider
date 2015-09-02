@@ -1,4 +1,5 @@
-﻿using SeleniumStorageProvider.Enum;
+﻿using System.Configuration;
+using SeleniumStorageProvider.Enum;
 using SeleniumStorageProvider.Interfaces;
 using SeleniumStorageProvider.Provider.AzureBlob;
 
@@ -11,7 +12,8 @@ namespace SeleniumStorageProvider
         /// <summary>
         /// Initializes a new instance of the <see cref="Storage"/> class.
         /// </summary>
-        public Storage() : this(new AzureBlobProvider())
+        public Storage()
+            : this(new AzureBlobProvider(ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"]))
         {
         }
 

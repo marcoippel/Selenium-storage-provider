@@ -29,9 +29,9 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
         /// Initializes a new instance of the <see cref="AzureBlobProvider"/> class.
         /// </summary>
         /// <exception cref="System.Exception">There is in the appsettings no key found with name: StorageConnectionString</exception>
-        public AzureBlobProvider()
+        public AzureBlobProvider(string connectionString)
         {
-            string connectionString = ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"];
+            //string connectionString = ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"];
             if (string.IsNullOrEmpty(connectionString))
             {
                 throw new Exception("There is in the appsettings no key found with name: StorageConnectionString");
@@ -63,7 +63,8 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
             string fileName = string.Format("{0}.html", DateTime.Now.ToString("HH-mm-ss"));
 
             var dateTime = DateTime.Now;
-            string blobFileName = eventType == EventType.Info ? string.Format("{0}/{1}/{2}/{3}/info/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName) : string.Format("{0}/{1}/{2}/{3}/error/{4}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, fileName);
+            string eventTypeName = eventType == EventType.Info ? "info" : "error";
+            string blobFileName = string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, GetEnvironmentName(), eventTypeName, fileName);
             
             CloudBlobClient blobClient = CloudStorageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference("seleniumscreenshots");
@@ -72,6 +73,12 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
             blockBlob.Properties.ContentType = "text/html";
             blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
+        }
+
+        private string GetEnvironmentName()
+        {
+            string host = HttpContext.Current.Request.Url.Host;
+            return !string.IsNullOrEmpty(ConfigurationManager.AppSettings[host]) ? ConfigurationManager.AppSettings[host] : "all";
         }
 
         private static string CreateErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)

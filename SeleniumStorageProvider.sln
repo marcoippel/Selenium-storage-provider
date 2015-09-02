@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{FBB3
 		Scripts\Create Nuget.cmd = Scripts\Create Nuget.cmd
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumStorageProvider.UnitTest", "SeleniumStorageProvider.UnitTest\SeleniumStorageProvider.UnitTest.csproj", "{936E26DB-B227-484F-B380-7D376F1AA0DE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTest", "SeleniumTest\SeleniumTest.csproj", "{0E1A277D-80C2-4446-9886-F17AE6136590}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppVeyor", "AppVeyor", "{F22F8927-685E-4BA6-BEA4-6578D11D6293}"
@@ -31,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{AC39DE
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumStorageProviderTests", "SeleniumStorageProviderTests\SeleniumStorageProviderTests.csproj", "{FB10CDE8-7A13-429D-985A-22CCF0532D08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,14 +41,14 @@ Global
 		{64D20077-5742-4742-BCB7-FD7A6F569387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64D20077-5742-4742-BCB7-FD7A6F569387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64D20077-5742-4742-BCB7-FD7A6F569387}.Release|Any CPU.Build.0 = Release|Any CPU
-		{936E26DB-B227-484F-B380-7D376F1AA0DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{936E26DB-B227-484F-B380-7D376F1AA0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{936E26DB-B227-484F-B380-7D376F1AA0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{936E26DB-B227-484F-B380-7D376F1AA0DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E1A277D-80C2-4446-9886-F17AE6136590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E1A277D-80C2-4446-9886-F17AE6136590}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E1A277D-80C2-4446-9886-F17AE6136590}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E1A277D-80C2-4446-9886-F17AE6136590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB10CDE8-7A13-429D-985A-22CCF0532D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB10CDE8-7A13-429D-985A-22CCF0532D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB10CDE8-7A13-429D-985A-22CCF0532D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB10CDE8-7A13-429D-985A-22CCF0532D08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

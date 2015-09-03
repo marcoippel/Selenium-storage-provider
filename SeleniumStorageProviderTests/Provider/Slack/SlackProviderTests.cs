@@ -29,13 +29,13 @@ namespace SeleniumStorageProviderTests.Provider.Slack
             Message = "unittest message";
             Url = "http://www.unittest.nl";
             ChannelId = "DBFGTYU";
-            Screenshot = EmbeddedResource.Get();
+            Screenshot = EmbeddedResource.GetAsByteArray("SeleniumStorageProviderTests.Response.ScreenShot.PNG");
         }
 
         [TestMethod]
         public void Post_Screenshot()
         {
-            string response = EmbeddedResource.Get("SeleniumStorageProviderTests.Response.ChannelList.json");
+            string response = EmbeddedResource.GetAsString("SeleniumStorageProviderTests.Response.ChannelList.json");
 
             Mock<IHttpClientWrapper> httpClientMock = new Mock<IHttpClientWrapper>();
             IHttpClientWrapper httpClient = httpClientMock.Object;

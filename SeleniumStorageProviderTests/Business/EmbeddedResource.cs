@@ -6,7 +6,7 @@ namespace SeleniumStorageProviderTests.Business
 {
     public class EmbeddedResource
     {
-        public string Get(string fileName)
+        public string GetAsString(string fileName)
         {
             var assembly = Assembly.GetExecutingAssembly();
             using (Stream stream = assembly.GetManifestResourceStream(fileName))
@@ -22,10 +22,9 @@ namespace SeleniumStorageProviderTests.Business
             return null;
         }
 
-        public byte[] Get()
+        public byte[] GetAsByteArray(string fileName)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            string fileName = assembly.GetManifestResourceNames().First();
             using (Stream stream = assembly.GetManifestResourceStream(fileName))
             {
                 if (stream != null)

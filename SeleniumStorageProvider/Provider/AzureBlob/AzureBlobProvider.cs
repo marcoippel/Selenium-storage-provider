@@ -64,7 +64,7 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
 
             var dateTime = DateTime.Now;
             string eventTypeName = eventType == EventType.Info ? "info" : "error";
-            string blobFileName = string.Format("{0}/{1}/{2}/{3}{4}/{5}/{6}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, GetEnvironmentName(), eventTypeName, fileName);
+            string blobFileName = string.Format("{0}/{1}/{2}/{3}{4}/{5}/{6}/{7}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, GetEnvironmentName(url), methodName, eventTypeName, fileName);
             
             CloudBlobClient blobClient = CloudStorageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference("seleniumscreenshots");
@@ -75,9 +75,11 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
             blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
         }
 
-        private string GetEnvironmentName()
+        private string GetEnvironmentName(string url)
         {
-            string host = HttpContext.Current.Request.Url.Host;
+            Uri uri = new Uri(url);
+
+            string host = uri.Host;
             return !string.IsNullOrEmpty(ConfigurationManager.AppSettings[host]) ? string.Format("/{0}", ConfigurationManager.AppSettings[host]) : string.Empty;
         }
 

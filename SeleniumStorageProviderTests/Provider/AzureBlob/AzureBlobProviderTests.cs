@@ -30,7 +30,7 @@ namespace SeleniumStorageProviderTests.Provider.AzureBlob
         public void Setup()
         {
             EmbeddedResource = new EmbeddedResource();
-            MethodName = "Slackprovider_can_post";
+            MethodName = "AzureBlobProvider_can_post";
             Url = "http://www.unittest.nl";
             Screenshot = EmbeddedResource.GetAsByteArray("SeleniumStorageProviderTests.Response.ScreenShot.PNG");
             Message = "unittest message";
@@ -57,14 +57,14 @@ namespace SeleniumStorageProviderTests.Provider.AzureBlob
                     PropertiesGet = () => new BlobProperties(),
                     UploadFromByteArrayAsyncByteArrayInt32Int32 = (bytes, i, arg3) =>
                     {
-                        Assert.AreEqual(bytes.Length, 250219);
+                        Assert.AreEqual(250223, bytes.Length);
                         return null;
                     }
                 };
 
                 shimCloudBlobContainer.GetBlockBlobReferenceString = s =>
                 {
-                    Assert.AreEqual("default/2015/12/12/error/12-10-15.html", s);
+                    Assert.AreEqual("default/2015/12/12/AzureBlobProvider_can_post/error/12-10-15.html", s);
                     return shimCloudBlockBlob;
                 };
 

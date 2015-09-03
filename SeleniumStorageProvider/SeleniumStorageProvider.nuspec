@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>$version$-beta</version>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -18,13 +18,15 @@
     <dependency id="Selenium.Support" version="2.45.0" />
   </dependencies>
   <releaseNotes>
-	  1.0.0.8 Filename changed to 24 hour format.
+    1.0.0.8 Filename changed to 24 hour format.
     2.0.0.0 Code refactored and added a slack provider.
+    2.0.0.1 Added environment in blob url if configured in the config.
   </releaseNotes>
   </metadata>
   <files>
     <file src="app.config.install.xdt" target="content" />
     <file src="app.config.uninstall.xdt" target="content" />
+    <file src="readme.txt" target="" />
   </files>
   
   

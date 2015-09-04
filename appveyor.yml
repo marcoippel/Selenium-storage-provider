@@ -1,8 +1,10 @@
 version: 1.0.{build}
+init:
+- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 build:
-  verbosity: detailed
+  verbosity: normal
 test:
-  assemblies: SeleniumStorageProvider.UnitTest.dll
+  assemblies: SeleniumStorageProviderTests.dll
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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

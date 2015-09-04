@@ -33,6 +33,7 @@ namespace SeleniumStorageProviderTests.Provider.Slack
             Screenshot = EmbeddedResource.GetAsByteArray("SeleniumStorageProviderTests.Response.ScreenShot.PNG");
         }
 
+        [TestCategory("appveyor")]
         [TestMethod]
         public void Post_Screenshot()
         {

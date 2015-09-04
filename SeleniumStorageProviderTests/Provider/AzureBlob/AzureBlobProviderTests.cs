@@ -34,6 +34,7 @@ namespace SeleniumStorageProviderTests.Provider.AzureBlob
         [TestMethod()]
         public void SaveTest()
         {
+            Console.WriteLine("Start SaveTest");
             using (ShimsContext.Create())
             {
                 var shimCloudBlobContainer = ShimCloudBlobContainer;
@@ -66,7 +67,7 @@ namespace SeleniumStorageProviderTests.Provider.AzureBlob
                 AzureBlobProvider azureBlobProvider = new AzureBlobProvider("fakeconnectionstring");
                 azureBlobProvider.Save(Screenshot, "<html></html>", Url, Message, MethodName, EventType.Error);
             }
-            
+            Console.WriteLine("End SaveTest");
         }
 
         private static ShimHttpRequest ShimHttpRequest

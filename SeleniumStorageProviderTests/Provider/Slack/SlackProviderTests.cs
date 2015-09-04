@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -35,6 +36,7 @@ namespace SeleniumStorageProviderTests.Provider.Slack
         [TestMethod]
         public void Post_Screenshot()
         {
+            Console.WriteLine("Start Post_Screenshot");
             string response = EmbeddedResource.GetAsString("SeleniumStorageProviderTests.Response.ChannelList.json");
 
             Mock<IHttpClientWrapper> httpClientMock = new Mock<IHttpClientWrapper>();
@@ -50,6 +52,8 @@ namespace SeleniumStorageProviderTests.Provider.Slack
                 x =>
                     x.PostAsync(It.Is<string>(y => y == "https://slack.com/api/files.upload"),
                         It.IsNotNull<MultipartFormDataContent>()), Times.Once);
+
+            Console.WriteLine("End Post_Screenshot");
         }
     }
 }

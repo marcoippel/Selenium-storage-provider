@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Fakes;
-using System.Security.Policy;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Fakes;
-using System.Web.Security.Fakes;
 using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Blob.Fakes;
 using Microsoft.WindowsAzure.Storage.Fakes;

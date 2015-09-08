@@ -2,6 +2,7 @@
 # Selenium-storage-provider
 
 Save your selenium screenshots to a azure blob storage account. Including the url, stacktrace and a screenshot.
+Or post your seleniumscreenshot to a channel on slack including the error message and the url of the tested page.
 
 Example: 
 ```

@@ -38,7 +38,7 @@ namespace SeleniumTest.Tests
         public void Initialize()
         {
             SetupDriver(_device);
-            _storage = new Storage(new SlackProvider(new HttpClientWrapper()));
+            _storage = new Storage(new SlackProvider());
         }
 
         [TearDown]

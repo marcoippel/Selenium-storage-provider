@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$-beta</version>
+    <version>$version$</version>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -21,6 +21,7 @@
     1.0.0.8 Filename changed to 24 hour format.
     2.0.0.0 Code refactored and added a slack provider.
     2.0.0.1 Added environment in blob url if configured in the config.
+    2.0.0.2 Fixed some bugs.
   </releaseNotes>
   </metadata>
   <files>

@@ -19,7 +19,7 @@ public void Initialize()
 }
 ```
 ## Screenshot
-![Image](/Screenshot/screenshot.PNG)
+![Image](/Screenshot/Slack.PNG)
 
 
 To post your screenshot to slack create an instance of the storage object like the example below.

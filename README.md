@@ -22,7 +22,7 @@ public void Initialize()
 ![Image](/Screenshot/Slack.PNG)
 
 
-To post your screenshot to slack create an instance of the storage object like the example below.
+To post your screenshot to azure blob storage create an instance of the storage object like the example below.
 
 Example: 
 ```

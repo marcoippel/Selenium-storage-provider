@@ -4,7 +4,11 @@
 Save your selenium screenshots to a azure blob storage account. Including the url, stacktrace and a screenshot.
 Or post your seleniumscreenshot to a channel on slack including the error message and the url of the tested page.
 
-To post your screenshot to slack create an instance of the storage object with an instance of the slackprovider.
+To post your screenshot to slack create an instance of the storage object with an instance of the slackprovider and configure the appsettings in your test project.
+```
+<add key="Slack:Token" value="{your slack token}" />
+<add key="Slack:Channel" value="{#channel}" />
+```
 
 ```
 [SetUp]
@@ -14,6 +18,11 @@ public void Initialize()
     _storage = new Storage(new SlackProvider());
 }
 ```
+## Screenshot
+![Image](/Screenshot/screenshot.PNG)
+
+
+To post your screenshot to slack create an instance of the storage object like the example below.
 
 Example: 
 ```
@@ -86,4 +95,4 @@ namespace SeleniumTestTemplate.Tests
 
 
 ## Screenshot
-![Image of Yaktocat](https://raw.githubusercontent.com/marcoippel/Selenium-storage-provider/develop/Screenshot/screenshot.PNG)
+![Image](/Screenshot/Azure.PNG)

@@ -109,5 +109,10 @@ namespace SeleniumStorageProvider.Provider.Slack
             formData.Dispose();
             _httpClient.Dispose();
         }
+
+        public void Save(string screenRecordingFile, string pageSource, string url, string message, string methodName, EventType eventType)
+        {
+            
+        }
     }
 }

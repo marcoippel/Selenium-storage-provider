@@ -5,23 +5,23 @@ using SeleniumStorageProvider.Provider.AzureBlob;
 
 namespace SeleniumStorageProvider
 {
-    public class Storage
+    public class ScreenShotStorage
     {
         private readonly IStorageProvider _storageProvider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Storage"/> class.
+        /// Initializes a new instance of the <see cref="ScreenShotStorage"/> class.
         /// </summary>
-        public Storage()
+        public ScreenShotStorage()
             : this(new AzureBlobProvider(ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"]))
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Storage"/> class.
+        /// Initializes a new instance of the <see cref="ScreenShotStorage"/> class.
         /// </summary>
         /// <param name="storage">The storage.</param>
-        public Storage(IStorageProvider storage)
+        public ScreenShotStorage(IStorageProvider storage)
         {
             _storageProvider = storage;
         }

@@ -6,8 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 using SeleniumStorageProvider;
 using SeleniumStorageProvider.Enum;
-using SeleniumStorageProvider.Provider.Slack;
-using SeleniumStorageProvider.Wrappers;
+using SeleniumStorageProvider.Provider.AzureBlob;
 using SeleniumTest.Business;
 using SeleniumTest.Enums;
 using SeleniumTest.Helpers;
@@ -20,7 +19,7 @@ namespace SeleniumTest.Tests
     public class Demo : SeleniumBase
     {
         private Devices _device;
-        private Storage _storage;
+        private ScreenCaptureStorage _screenCaptureStorage;
 
         public Demo()
         {
@@ -38,7 +37,8 @@ namespace SeleniumTest.Tests
         public void Initialize()
         {
             SetupDriver(_device);
-            _storage = new Storage(new SlackProvider());
+            _screenCaptureStorage = new ScreenCaptureStorage(TestContext.CurrentContext.TestDirectory);
+            _screenCaptureStorage.Start();
         }
 
         [TearDown]
@@ -74,8 +74,7 @@ namespace SeleniumTest.Tests
         private void TakeScreenshot(IWebDriver driver, string message, EventType eventType)
         {
             var methodName = new StackFrame(1, true).GetMethod().Name;
-            byte[] screenshot = driver.TakeScreenshot().AsByteArray;
-            _storage.Save(screenshot, driver.PageSource, Driver.Url, message, methodName, eventType);
+            _screenCaptureStorage.Save(driver.PageSource, Driver.Url, message, methodName, eventType);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
             //string connectionString = ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"];
             if (string.IsNullOrEmpty(connectionString))
             {
-                throw new Exception("There is in the appsettings no key found with name: StorageConnectionString");
+                throw new Exception("There is in the appsettings no key found with name: AzureBlob:StorageConnectionString");
             }
 
             CloudStorageAccount = CloudStorageAccount.Parse(connectionString);
@@ -52,7 +52,7 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
         /// <exception cref="System.Exception">Error creating the html template</exception>
         public void Save(byte[] screenshot, string pageSource, string url, string message, string methodName, EventType eventType)
         {
-            var htmlFile = CreateErrorTemplate(Convert.ToBase64String(screenshot), pageSource, url, message, methodName);
+            var htmlFile = CreateScreenShotErrorTemplate(Convert.ToBase64String(screenshot), pageSource, url, message, methodName);
             if (string.IsNullOrEmpty(htmlFile))
             {
                 throw new Exception("Error creating the html template");
@@ -62,17 +62,66 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
 
             string fileName = string.Format("{0}.html", DateTime.Now.ToString("HH-mm-ss"));
 
-            var dateTime = DateTime.Now;
+            DateTime dateTime = DateTime.Now;
             string eventTypeName = eventType == EventType.Info ? "info" : "error";
             string blobFileName = string.Format("{0}/{1}/{2}/{3}{4}/{5}/{6}/{7}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, GetEnvironmentName(url), methodName, eventTypeName, fileName);
-            
-            CloudBlobClient blobClient = CloudStorageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference("seleniumscreenshots");
-            container.CreateIfNotExists();
-            
+
+            CloudBlobContainer container = CreateCloudBlobContainer("seleniumscreenshots");
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
             blockBlob.Properties.ContentType = "text/html";
             blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
+        }
+
+        /// <summary>
+        /// Saves the specified screen recording file.
+        /// </summary>
+        /// <param name="screenRecordingFile">The screen recording file.</param>
+        /// <param name="pageSource">The page source.</param>
+        /// <param name="url">The URL.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="methodName">Name of the method.</param>
+        /// <param name="eventType">Type of the event.</param>
+        /// <exception cref="Exception">Error creating the html template</exception>
+        public void Save(string screenRecordingFile, string pageSource, string url, string message, string methodName, EventType eventType)
+        {
+            if (File.Exists(screenRecordingFile))
+            {
+                DateTime dateTime = DateTime.Now;
+                string eventTypeName = eventType == EventType.Info ? "info" : "error";
+                string fileName = Path.GetFileName(screenRecordingFile);
+                string blobFileName = string.Format("{0}/{1}/{2}/{3}{4}/{5}/{6}/{7}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, GetEnvironmentName(url), methodName, eventTypeName, fileName);
+
+                CloudBlobContainer container = CreateCloudBlobContainer("seleniumscreencaptures");
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
+                using (var fileStream = File.OpenRead(screenRecordingFile))
+                {
+                    blockBlob.UploadFromStream(fileStream);
+                }
+
+                File.Delete(screenRecordingFile);
+
+                var htmlFile = CreateScreenCaptureErrorTemplate(GenerateEmbedVideoCode(blobFileName), pageSource, url, message, methodName);
+                if (string.IsNullOrEmpty(htmlFile))
+                {
+                    throw new Exception("Error creating the html template");
+                }
+            }
+        }
+
+        private string GenerateEmbedVideoCode(string blobFileName)
+        {
+            const string htmlTemplateFileName = "EmbedVideo.html";
+            string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
+
+            return html.Replace("{embeddedvideo}", blobFileName);
+        }
+
+        private CloudBlobContainer CreateCloudBlobContainer(string containerName)
+        {
+            CloudBlobClient blobClient = CloudStorageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+            container.CreateIfNotExists();
+            return container;
         }
 
         private string GetEnvironmentName(string url)
@@ -83,12 +132,20 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
             return !string.IsNullOrEmpty(ConfigurationManager.AppSettings[host]) ? string.Format("/{0}", ConfigurationManager.AppSettings[host]) : string.Empty;
         }
 
-        private static string CreateErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)
+        private static string CreateScreenShotErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)
         {
-            const string htmlTemplateFileName = "ErrorTemplate.html";
+            const string htmlTemplateFileName = "ScreenShotErrorTemplate.html";
             string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
             var encodedPageSource = HttpUtility.HtmlEncode(pageSource);
             return html.Replace("{url}", url).Replace("{message}", message).Replace("{base64string}", base64File).Replace("{pagesource}", encodedPageSource).Replace("{methodName}", methodName);
+        }
+
+        private string CreateScreenCaptureErrorTemplate(string embeddedVideo, string pageSource, string url, string message, string methodName)
+        {
+            const string htmlTemplateFileName = "ScreenCaptureErrorTemplate.html";
+            string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
+            var encodedPageSource = HttpUtility.HtmlEncode(pageSource);
+            return html.Replace("{url}", url).Replace("{message}", message).Replace("{embeddedvideo}", embeddedVideo).Replace("{pagesource}", encodedPageSource).Replace("{methodName}", methodName);
         }
 
         private static string LoadTemplate(Assembly currentAssembly, string resourceName)

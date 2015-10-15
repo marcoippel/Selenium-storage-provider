@@ -111,7 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme.txt" />
-    <Content Include="Template\EmbedVideo.html" />
+    <EmbeddedResource Include="Template\EmbedVideo.html" />
     <EmbeddedResource Include="Template\ScreenCaptureTemplate.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

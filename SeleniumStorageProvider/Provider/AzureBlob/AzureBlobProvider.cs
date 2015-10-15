@@ -134,7 +134,7 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
 
         private static string CreateScreenShotErrorTemplate(string base64File, string pageSource, string url, string message, string methodName)
         {
-            const string htmlTemplateFileName = "ScreenShotErrorTemplate.html";
+            const string htmlTemplateFileName = "ScreenShotTemplate.html";
             string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
             var encodedPageSource = HttpUtility.HtmlEncode(pageSource);
             return html.Replace("{url}", url).Replace("{message}", message).Replace("{base64string}", base64File).Replace("{pagesource}", encodedPageSource).Replace("{methodName}", methodName);
@@ -142,7 +142,7 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
 
         private string CreateScreenCaptureErrorTemplate(string embeddedVideo, string pageSource, string url, string message, string methodName)
         {
-            const string htmlTemplateFileName = "ScreenCaptureErrorTemplate.html";
+            const string htmlTemplateFileName = "ScreenCaptureTemplate.html";
             string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
             var encodedPageSource = HttpUtility.HtmlEncode(pageSource);
             return html.Replace("{url}", url).Replace("{message}", message).Replace("{embeddedvideo}", embeddedVideo).Replace("{pagesource}", encodedPageSource).Replace("{methodName}", methodName);

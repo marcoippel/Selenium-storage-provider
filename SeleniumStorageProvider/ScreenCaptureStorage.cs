@@ -21,16 +21,23 @@ namespace SeleniumStorageProvider
             : this(new AzureBlobProvider(ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"]), screenCaptureFolder)
         {
             ScreenCaptureJob = new ScreenCaptureJob();
+            if (screenCaptureFolder == null || !Directory.Exists(screenCaptureFolder))
+            {
+                throw new DirectoryNotFoundException(string.Format("Directory {0} not found", screenCaptureFolder));
+            }
+
+            OutputScreenCaptureFile = String.Format("{0}\\ScreenCapture.wmv", screenCaptureFolder);
+            ScreenCaptureJob.OutputScreenCaptureFileName = OutputScreenCaptureFile;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ScreenCaptureStorage"/> class.
         /// </summary>
         /// <param name="storage">The storage.</param>
-        /// <param name="screenCaptureFileName"></param>
         /// <param name="screenCaptureFolder"></param>
         public ScreenCaptureStorage(IStorageProvider storage, string screenCaptureFolder)
         {
+            ScreenCaptureJob = new ScreenCaptureJob();
             _storageProvider = storage;
             if (screenCaptureFolder == null || !Directory.Exists(screenCaptureFolder))
             {

@@ -11,17 +11,14 @@
     <summary>Save your seleniumscreenshot to a azure blobstorage or post it to a slack channel. With a screenshot it is much easier to debug your failed selenium tests</summary>
     <copyright>Copyright 2015</copyright>
     <tags>Selenium, azure blobstorage, slack</tags>
-    <projectUrl>https://github.com/marcoippel/Selenium-storage-provider</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/marcoippel/Selenium-storage-provider/develop/Nuget.png</iconUrl>
+    <projectUrl>https://github.com/marcoippel/Seleniumtest.ScreenCapture.Provider</projectUrl>
+    <iconUrl></iconUrl>
 	<dependencies>
     <dependency id="WindowsAzure.Storage" version="4.3.0" />
     <dependency id="Selenium.Support" version="2.45.0" />
   </dependencies>
   <releaseNotes>
-    1.0.0.8 Filename changed to 24 hour format.
-    2.0.0.0 Code refactored and added a slack provider.
-    2.0.0.1 Added environment in blob url if configured in the config.
-    2.0.0.2 Fixed some bugs.
+    
   </releaseNotes>
   </metadata>
   <files>
@@ -29,6 +26,4 @@
     <file src="app.config.uninstall.xdt" target="content" />
     <file src="readme.txt" target="" />
   </files>
-  
-  
 </package>

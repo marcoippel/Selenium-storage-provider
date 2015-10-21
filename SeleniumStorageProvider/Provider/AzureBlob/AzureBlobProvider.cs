@@ -58,18 +58,7 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
                 throw new Exception("Error creating the html template");
             }
 
-            byte[] file = Encoding.ASCII.GetBytes(htmlFile);
-
-            string fileName = string.Format("{0}.html", DateTime.Now.ToString("HH-mm-ss"));
-
-            DateTime dateTime = DateTime.Now;
-            string eventTypeName = eventType == EventType.Info ? "info" : "error";
-            string blobFileName = string.Format("{0}/{1}/{2}/{3}{4}/{5}/{6}/{7}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, GetEnvironmentName(url), methodName, eventTypeName, fileName);
-
-            CloudBlobContainer container = CreateCloudBlobContainer("seleniumscreenshots");
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
-            blockBlob.Properties.ContentType = "text/html";
-            blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
+            UploadHtmlTemplate(url, methodName, eventType, htmlFile);
         }
 
         /// <summary>
@@ -105,7 +94,26 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
                 {
                     throw new Exception("Error creating the html template");
                 }
+
+                UploadHtmlTemplate(url, methodName, eventType, htmlFile);
+
             }
+        }
+
+        private void UploadHtmlTemplate(string url, string methodName, EventType eventType, string htmlFile)
+        {
+            byte[] file = Encoding.ASCII.GetBytes(htmlFile);
+
+            string fileName = string.Format("{0}.html", DateTime.Now.ToString("HH-mm-ss"));
+
+            DateTime dateTime = DateTime.Now;
+            string eventTypeName = eventType == EventType.Info ? "info" : "error";
+            string blobFileName = string.Format("{0}/{1}/{2}/{3}{4}/{5}/{6}/{7}", StorageContainer, dateTime.Year, dateTime.Month, dateTime.Day, GetEnvironmentName(url), methodName, eventTypeName, fileName);
+
+            CloudBlobContainer container = CreateCloudBlobContainer("seleniumscreenshots");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobFileName);
+            blockBlob.Properties.ContentType = "text/html";
+            blockBlob.UploadFromByteArrayAsync(file, 0, file.Length);
         }
 
         private string GenerateEmbedVideoCode(string blobFileName)
@@ -113,7 +121,7 @@ namespace SeleniumStorageProvider.Provider.AzureBlob
             const string htmlTemplateFileName = "EmbedVideo.html";
             string html = LoadTemplate(Assembly.GetExecutingAssembly(), htmlTemplateFileName);
 
-            return html.Replace("{embeddedvideo}", blobFileName);
+            return html.Replace("{embeddedvideo}", "https://seleniumscreenshots.blob.core.windows.net/seleniumscreencaptures/" + blobFileName);
         }
 
         private CloudBlobContainer CreateCloudBlobContainer(string containerName)

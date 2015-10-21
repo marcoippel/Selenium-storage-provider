@@ -17,8 +17,7 @@ namespace SeleniumStorageProvider
         /// <summary>
         /// Initializes a new instance of the <see cref="ScreenCaptureStorage"/> class.
         /// </summary>
-        public ScreenCaptureStorage(string screenCaptureFolder)
-            : this(new AzureBlobProvider(ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"]), screenCaptureFolder)
+        public ScreenCaptureStorage(string screenCaptureFolder) : this(new AzureBlobProvider(ConfigurationManager.AppSettings["AzureBlob:StorageConnectionString"]), screenCaptureFolder)
         {
             ScreenCaptureJob = new ScreenCaptureJob();
             if (screenCaptureFolder == null || !Directory.Exists(screenCaptureFolder))
